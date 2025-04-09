@@ -31,7 +31,7 @@ class MovieLayoutController extends Controller
             JOIN movie_genre mg ON m.id = mg.id_movie
             WHERE mg.id_genre = ?
             ORDER BY m.popularity DESC
-            LIMIT 0, 24 -- Tăng giới hạn nếu muốn hiển thị nhiều hơn
+            LIMIT 0, 12 
         ", [$id]);
 
         $genres = $this->getGenres(); 
