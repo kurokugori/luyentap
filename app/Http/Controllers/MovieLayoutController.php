@@ -12,7 +12,8 @@ class MovieLayoutController extends Controller
  {
     
     $data = DB::select("select * from movie where vote_average>7 and popularity>450 order by release_date desc limit 0,12"); 
-    return view("movie.index", compact("data"));
+    $genre = $this->getGenres();
+    return view("movie.index", compact("data","genre"));
     
  }
  function getGenres()
@@ -24,7 +25,7 @@ class MovieLayoutController extends Controller
     function showGenre($id)
     {
         $currentGenre = DB::selectOne("SELECT id, genre_name_vn FROM genre WHERE id = ?", [$id]);
-
+        $genre = $this->getGenres();
         $data = DB::select("
             SELECT m.*
             FROM movie m
@@ -33,11 +34,10 @@ class MovieLayoutController extends Controller
             ORDER BY m.popularity DESC
             LIMIT 0, 12 
         ", [$id]);
-
-        $genres = $this->getGenres(); 
+ 
         return view('movie.index', [
             'data' => $data,
-            'genres' => $genres,
+            'genre' => $genre,
             'genreName' => $currentGenre->genre_name_vn 
         ]);
     }
@@ -49,7 +49,7 @@ class MovieLayoutController extends Controller
         if (!$data) {
             abort(404);
         }
-        $genres = $this->getGenres(); 
+        $genre = $this->getGenres();
 
          $movieGenres = DB::table('genre')
                         ->join('movie_genre', 'genre.id', '=', 'movie_genre.id_genre')
@@ -57,6 +57,6 @@ class MovieLayoutController extends Controller
                         ->pluck('genre_name_vn')
                         ->implode(', ');
 
-        return view('movie.details', compact('data', 'genres', 'movieGenres'));
+        return view('movie.details', compact('data', 'genre', 'movieGenres'));
 }
 }

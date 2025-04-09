@@ -101,7 +101,7 @@
             <div class='col-3 pr-0'>
                 <div class="card" style="width: 18rem; background-color:#222;color:white;">
                     <div class="card-header">
-                    <i class="fa fa-film" aria-hidden="true"></i> <b>Thể loại phim</b>
+                        <i class="fa fa-film" aria-hidden="true"></i> <b>Thể loại phim</b>
                     </div>
                     <ul class="list-group list-group-flush list-group-movie">
                         @foreach($genre as $row)

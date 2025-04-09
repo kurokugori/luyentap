@@ -8,8 +8,8 @@ Route::get('/', function () {
 });
 Route::get('/movie','App\Http\Controllers\MovieLayoutController@movie');
 
-Route::get('/the-loai/{id}', [MovieLayoutController::class, 'showGenre'])
-     ->name('movie.genre'); // Tên route dùng trong layout
+Route::get('/theloai/{id}', [MovieLayoutController::class, 'showGenre'])
+     ->name('movies.genre');
 
 Route::get('/details/{id}', [MovieLayoutController::class, 'showDetails'])
      ->name('movie.details');
